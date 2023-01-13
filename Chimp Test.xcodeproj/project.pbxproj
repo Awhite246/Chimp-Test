@@ -12,6 +12,8 @@
 		E30F238429705EFC006E6A6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E30F238329705EFC006E6A6E /* Assets.xcassets */; };
 		E30F238729705EFC006E6A6E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E30F238629705EFC006E6A6E /* Preview Assets.xcassets */; };
 		E30F239229705F47006E6A6E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F239129705F47006E6A6E /* MainView.swift */; };
+		E30F23982970D0B4006E6A6E /* LoseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F23972970D0B4006E6A6E /* LoseView.swift */; };
+		E30F239A2970D15B006E6A6E /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F23992970D15B006E6A6E /* HelpView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +23,8 @@
 		E30F238329705EFC006E6A6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E30F238629705EFC006E6A6E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E30F239129705F47006E6A6E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		E30F23972970D0B4006E6A6E /* LoseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoseView.swift; sourceTree = "<group>"; };
+		E30F23992970D15B006E6A6E /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,8 @@
 			children = (
 				E30F238129705EFA006E6A6E /* ContentView.swift */,
 				E30F239129705F47006E6A6E /* MainView.swift */,
+				E30F23972970D0B4006E6A6E /* LoseView.swift */,
+				E30F23992970D15B006E6A6E /* HelpView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -151,6 +157,8 @@
 				E30F239229705F47006E6A6E /* MainView.swift in Sources */,
 				E30F238229705EFA006E6A6E /* ContentView.swift in Sources */,
 				E30F238029705EFA006E6A6E /* Chimp_TestApp.swift in Sources */,
+				E30F239A2970D15B006E6A6E /* HelpView.swift in Sources */,
+				E30F23982970D0B4006E6A6E /* LoseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
