@@ -80,7 +80,10 @@ struct MainView: View {
                             }
                             //if wrong number reset
                             else if buttonList[num].num != currNum {
-                                resetButtons()
+                                lose += 1
+                                currNum = 1
+                                randomizeList()
+                                showLoseView = true
                             }
                             //if right number hide button
                             else {
@@ -116,6 +119,14 @@ struct MainView: View {
         }
         .fullScreenCover(isPresented: $showLoseView) {
             LoseView(colorBack: colorSet[colorNum][1], colorMiddle: colorSet[colorNum][0], colorFront: colorSet[colorNum][2], loseCount: lose, buttonCount: currMax - 1)
+                .onDisappear {
+                    if lose == 3 {
+                        lose = 0
+                        currNum = 1
+                        randomizeList()
+                        colorNum = Int.random(in: 0...10)
+                    }
+                }
         }
     }
     //randomizes buttonList and hides and shows numbers based on if they are less than max num
@@ -123,12 +134,7 @@ struct MainView: View {
         buttonList.shuffle()
         updateButtons()
     }
-    func resetButtons() {
-        lose += 1
-        currNum = 1
-        colorNum = Int.random(in: 0...10)
-        randomizeList()
-    }
+    
     func updateButtons() {
         for i in 0..<buttonList.count {
             if buttonList[i].num <= currMax {
