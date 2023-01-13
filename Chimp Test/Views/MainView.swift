@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @State var currNum = 1
-    @State var currMax = 4
+    @State var currMax = 45
     //Used to keep track of how many loses there has been
     @State var lose = 0
     //Used to choose random color palate from colorset
@@ -32,80 +32,70 @@ struct MainView: View {
                     [Color("Cornsilk"), Color("Desert Sand"), Color("Tumbleweed 2")],
                     [Color("Cinnamon Satin"), Color("Carolina Blue"), Color("Ivory")]]
     //Creates a list of buttons from 1 - 30 using .map
-    @State var buttonList = (1...40).map { ChimpButton(num: $0, hidden: ($0 < 5) ? false : true)}
+    @State var buttonList = (1...45).map { ChimpButton(num: $0, hidden: ($0 < 5) ? false : true)}
     var body: some View {
-        ZStack {
-            //creates background color using middle of color set
-            colorSet[colorNum][1].ignoresSafeArea()
-            VStack {
-                let topBarSize = UIScreen.main.bounds.width / 7
-                colorSet[colorNum][0]
-                    .ignoresSafeArea()
-                    .frame(height: topBarSize)
-                    .overlay(
-                        Group {
-                            VStack {
-                                Button {
-                                    showHelpView = true
-                                } label: {
-                                    Image(systemName: "questionmark.circle")
-                                        .resizable()
-                                        .foregroundColor(colorSet[colorNum][2])
-                                        .frame(width: 25, height: 25)
-                                    
+        NavigationView {
+            ZStack {
+                //creates background color using middle of color set
+                colorSet[colorNum][1].ignoresSafeArea()
+                VStack {
+                    Spacer()
+                    LazyVGrid(columns: columns) {
+                        ForEach(0..<buttonList.count, id: \.self) { num in
+                            Button {
+                                //if last number randomize and add button
+                                if currNum == currMax {
+                                    currMax += 1
+                                    currMax %= buttonList.count
+                                    currNum = 1
+                                    randomizeList()
                                 }
-                                .padding(.top, -1 * (topBarSize))
-                                //makes sure question mark stays on upper left while not going out of bounds on other phone versions
-                                .offset(x: UIScreen.main.bounds.width / 2.75)
-                                Text("Chimp Test Memory Game")
-                                    .font(.title).bold()
-                                    .foregroundColor(colorSet[colorNum][2])
-                                    .padding(.top, -1 * (topBarSize / 2))
+                                //if wrong number reset
+                                else if buttonList[num].num != currNum {
+                                    showLoseView = true
+                                }
+                                //if right number hide button
+                                else {
+                                    buttonList[num].toggle()
+                                    currNum += 1
+                                }
+                            } label: {
+                                ZStack {
+                                    //box and text of number
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .frame(width: 68, height: 68)
+                                    //shows color if not disabled
+                                        .foregroundColor(buttonList[num].hidden ? .clear : colorSet[colorNum][0])
+                                    Text("\(buttonList[num].num)")
+                                    //shows color if not disabled
+                                        .foregroundColor((buttonList[num].hidden || (currNum > 1 && currMax > 4)) ? .clear : colorSet[colorNum][2])
+                                        .font(.title).bold()
+                                }
+                                
                             }
+                            .disabled(buttonList[num].hidden)
+                            .padding(.bottom, -2)
                         }
-                    )
-                LinearGradient(gradient: Gradient(colors: [colorSet[colorNum][0], Color.clear]), startPoint: .top, endPoint: .bottom)
-                    .frame(height: 15)
-                    .padding(.top, -10)
-                Spacer()
-                LazyVGrid(columns: columns) {
-                    ForEach(0..<buttonList.count, id: \.self) { num in
-                        Button {
-                            //if last number randomize and add button
-                            if currNum == currMax {
-                                currMax += 1
-                                currMax %= buttonList.count
-                                currNum = 1
-                                randomizeList()
-                            }
-                            //if wrong number reset
-                            else if buttonList[num].num != currNum {
-                                showLoseView = true
-                            }
-                            //if right number hide button
-                            else {
-                                buttonList[num].toggle()
-                                currNum += 1
-                            }
-                        } label: {
-                            ZStack {
-                                //box and text of number
-                                RoundedRectangle(cornerRadius: 15)
-                                    .frame(width: 68, height: 68)
-                                //shows color if not disabled
-                                    .foregroundColor(buttonList[num].hidden ? .clear : colorSet[colorNum][0])
-                                Text("\(buttonList[num].num)")
-                                //shows color if not disabled
-                                    .foregroundColor((buttonList[num].hidden || (currNum > 1 && currMax > 4)) ? .clear : colorSet[colorNum][2])
-                                    .font(.title).bold()
-                            }
-                            
-                        }
-                        .disabled(buttonList[num].hidden)
-                        .padding(.bottom, -2)
                     }
+                    Spacer()
+                    Button {
+                        showHelpView = true
+                    } label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 15)
+                                .foregroundColor(colorSet[colorNum][0])
+                                .frame(width:70, height: 70)
+                            Image(systemName: "questionmark.circle")
+                                .resizable()
+                                .foregroundColor(colorSet[colorNum][2])
+                                .frame(width: 25, height: 25)
+                                .offset(x: -10, y: -10)
+                        }
+                    }
+                    .padding(.bottom, -50)
+                    .offset(x: UIScreen.main.bounds.width / 2.2)
+                    .ignoresSafeArea()
                 }
-                Spacer()
             }
         }
         .onAppear {
