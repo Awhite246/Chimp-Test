@@ -42,6 +42,7 @@ struct LoseView: View {
                         .font(.system(size: 50)).bold()
                     }
                     .foregroundColor(colorMiddle)
+                    
                 } else {
                     Group {
                         Image(systemName: "square.grid.3x3.topleft.filled")
