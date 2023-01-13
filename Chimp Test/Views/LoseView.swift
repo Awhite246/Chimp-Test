@@ -47,12 +47,17 @@ struct LoseView: View {
                     Group {
                         Image(systemName: "square.grid.3x3.topleft.filled")
                             .font(.system(size: 75)).bold()
-                            .padding(.top, 200)
+                            .padding(.top, 130)
                         Text("Score")
                             .font(.largeTitle).bold()
                             .padding(.top, 50)
                         Text("\(buttonCount)")
                             .font(.system(size: 100)).bold()
+                        Text(buttonCount < 19 ? "You Are Not Smarter Than A Chimpanzee" : "You Are Smarter Than A Chimpanzee")
+                            .frame(width: 200)
+                            .multilineTextAlignment(.center)
+                            .font(.title3).bold()
+                            .padding(.top, -20)
                             .padding(.bottom, 30)
                     }
                     .foregroundColor(colorMiddle)
@@ -78,6 +83,6 @@ struct LoseView: View {
 
 struct LoseView_Previews: PreviewProvider {
     static var previews: some View {
-        LoseView(colorBack: Color("Steel Teal"), colorMiddle: Color("Tea Green"), colorFront: Color("Charcoal"), loseCount: 3, buttonCount: 7)
+        LoseView(colorBack: Color("Steel Teal"), colorMiddle: Color("Tea Green"), colorFront: Color("Charcoal"), loseCount: 3, buttonCount: 30)
     }
 }
