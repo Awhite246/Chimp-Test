@@ -64,6 +64,9 @@ struct MainView: View {
                             }
                         }
                     )
+                LinearGradient(gradient: Gradient(colors: [colorSet[colorNum][0], Color.clear]), startPoint: .top, endPoint: .bottom)
+                    .frame(height: 15)
+                    .padding(.top, -10)
                 Spacer()
                 LazyVGrid(columns: columns) {
                     ForEach(0..<buttonList.count, id: \.self) { num in
@@ -93,7 +96,7 @@ struct MainView: View {
                                     .foregroundColor(buttonList[num].hidden ? .clear : colorSet[colorNum][0])
                                 Text("\(buttonList[num].num)")
                                 //shows color if not disabled
-                                    .foregroundColor((buttonList[num].hidden || (currNum > 1 && currMax > 5)) ? .clear : colorSet[colorNum][2])
+                                    .foregroundColor((buttonList[num].hidden || (currNum > 1 && currMax > 4)) ? .clear : colorSet[colorNum][2])
                                     .font(.title).bold()
                             }
                             
@@ -109,7 +112,10 @@ struct MainView: View {
             randomizeList()
         }
         .sheet(isPresented: $showHelpView) {
-            LoseView(colorBack: colorSet[colorNum][1], colorMiddle: colorSet[colorNum][0], colorFront: colorSet[colorNum][2])
+            HelpView(colorBack: colorSet[colorNum][1], colorMiddle: colorSet[colorNum][0], colorFront: colorSet[colorNum][2])
+        }
+        .fullScreenCover(isPresented: $showLoseView) {
+            LoseView(colorBack: colorSet[colorNum][1], colorMiddle: colorSet[colorNum][0], colorFront: colorSet[colorNum][2], loseCount: lose, buttonCount: currMax - 1)
         }
     }
     //randomizes buttonList and hides and shows numbers based on if they are less than max num
