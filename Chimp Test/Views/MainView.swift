@@ -80,9 +80,6 @@ struct MainView: View {
                             }
                             //if wrong number reset
                             else if buttonList[num].num != currNum {
-                                lose += 1
-                                currNum = 1
-                                randomizeList()
                                 showLoseView = true
                             }
                             //if right number hide button
@@ -117,16 +114,16 @@ struct MainView: View {
         .sheet(isPresented: $showHelpView) {
             HelpView(colorBack: colorSet[colorNum][1], colorMiddle: colorSet[colorNum][0], colorFront: colorSet[colorNum][2])
         }
-        .fullScreenCover(isPresented: $showLoseView) {
-            LoseView(colorBack: colorSet[colorNum][1], colorMiddle: colorSet[colorNum][0], colorFront: colorSet[colorNum][2], loseCount: lose, buttonCount: currMax - 1)
-                .onDisappear {
-                    if lose == 3 {
-                        lose = 0
-                        currNum = 1
-                        randomizeList()
-                        colorNum = Int.random(in: 0...10)
-                    }
-                }
+        .fullScreenCover(isPresented: $showLoseView, onDismiss: {
+            lose += 1
+            if lose == 3 {
+                colorNum = Int.random(in: 0...10)
+                lose = 0
+            }
+            currNum = 1
+            randomizeList()
+        }) {
+            LoseView(colorBack: colorSet[colorNum][1], colorMiddle: colorSet[colorNum][0], colorFront: colorSet[colorNum][2], loseCount: lose + 1, buttonCount: currMax - 1)
         }
     }
     //randomizes buttonList and hides and shows numbers based on if they are less than max num
