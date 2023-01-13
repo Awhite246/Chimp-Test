@@ -13,7 +13,7 @@ struct MainView: View {
     //Used to keep track of how many loses there has been
     @State var lose = 0
     //Used to choose random color palate from colorset
-    @State var colorNum = 10
+    @State var colorNum = Int.random(in: 0...10)
     //Stores weather to show lose and help view
     @State var showLoseView = false
     @State var showHelpView = false
@@ -119,6 +119,7 @@ struct MainView: View {
             if lose == 3 {
                 colorNum = Int.random(in: 0...10)
                 lose = 0
+                currMax = 4
             }
             currNum = 1
             randomizeList()
