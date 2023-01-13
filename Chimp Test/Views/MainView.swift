@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @State var currNum = 1
-    @State var currMax = 45
+    @State var currMax = 4
     //Used to keep track of how many loses there has been
     @State var lose = 0
     //Used to choose random color palate from colorset
