@@ -14,6 +14,8 @@ struct AltGame: View {
     @State var currMax = 4
     //Used to keep track of how many loses there has been
     @State var lose = 0
+    //triggers when timer reaches full
+    @State var hideAll = false
     
     //Stores weather to show lose and help view
     @State var showLoseView = false
@@ -27,7 +29,12 @@ struct AltGame: View {
     //Array to hold column setup
     let columns = [GridItem(.fixed(69)), GridItem(.fixed(69)), GridItem(.fixed(69)), GridItem(.fixed(69)), GridItem(.fixed(69))]
     //Creates a list of buttons from 1 - 30 using .map
-    @State var buttonList = (1...45).map { ChimpButton(num: $0, hidden: ($0 < 5) ? false : true)}
+    @State var buttonList = (1...40).map { ChimpButton(num: $0, hidden: ($0 < 5) ? false : true)}
+    
+    //timer / progress bar on top
+    @State var progress = 0.0
+    let timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -35,15 +42,31 @@ struct AltGame: View {
                 colorSet[colorNum][1].ignoresSafeArea()
                 VStack {
                     Spacer()
+                    ZStack(alignment: .leading) {
+                        Rectangle()
+                            .frame(maxWidth: 350, maxHeight: 4)
+                            .foregroundColor(colorSet[colorNum][0])
+                            .cornerRadius(10)
+                        Rectangle()
+                            .frame(width: progress * 350, height: 4)
+                            .foregroundColor(colorSet[colorNum][2])
+                            .cornerRadius(10)
+                    }
+                    Spacer()
                     LazyVGrid(columns: columns) {
                         ForEach(0..<buttonList.count, id: \.self) { num in
                             Button {
+                                if currNum == 1 {
+                                    progress = 1.0
+                                }
                                 //if last number randomize and add button
                                 if currNum == currMax {
                                     currMax += 1
                                     currMax %= buttonList.count
                                     currNum = 1
                                     randomizeList()
+                                    progress = 0.0
+                                    hideAll = false
                                 }
                                 //if wrong number reset
                                 else if buttonList[num].num != currNum {
@@ -63,7 +86,7 @@ struct AltGame: View {
                                         .foregroundColor(buttonList[num].hidden ? .clear : colorSet[colorNum][0])
                                     Text("\(buttonList[num].num)")
                                     //shows color if not disabled
-                                        .foregroundColor((buttonList[num].hidden || (currNum > 1 && currMax > 4)) ? .clear : colorSet[colorNum][2])
+                                        .foregroundColor((buttonList[num].hidden || (currNum > 1 && currMax > 4) || (currMax > 4 && hideAll)) ? .clear : colorSet[colorNum][2])
                                         .font(.title).bold()
                                 }
                                 
@@ -117,8 +140,17 @@ struct AltGame: View {
             }
             currNum = 1
             randomizeList()
+            progress = 0
+            hideAll = false
         }) {
             LoseView(colorBack: colorSet[colorNum][1], colorMiddle: colorSet[colorNum][0], colorFront: colorSet[colorNum][2], loseCount: lose + 1, buttonCount: currMax - 1)
+        }
+        .onReceive(timer) { _ in
+            if progress < 1 {
+                progress += 0.005
+            } else {
+                hideAll = true
+            }
         }
     }
     //randomizes buttonList and hides and shows numbers based on if they are less than max num
