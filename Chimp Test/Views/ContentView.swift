@@ -26,7 +26,7 @@ struct ContentView: View {
                     .foregroundColor(Color("Tea Green"))
                     Spacer()
                     NavigationLink {
-                        MainView()
+                        AltGameView()
                             .navigationBarBackButtonHidden()
                     } label: {
                         ZStack {

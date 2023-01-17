@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
+import AVFoundation
 
-struct MainView: View {
+struct AltGameView: View {
     @State var currNum = 1
     @State var currMax = 4
     //Used to keep track of how many loses there has been
@@ -107,7 +108,14 @@ struct MainView: View {
         .fullScreenCover(isPresented: $showLoseView, onDismiss: {
             lose += 1
             if lose == 3 {
-                colorNum = Int.random(in: 0...10)
+                //makes sure you dont get repeat color palat in a row
+                let tempColorNum = Int.random(in: 0...10)
+                if colorNum != tempColorNum {
+                    colorNum = tempColorNum
+                } else {
+                    colorNum += 1
+                    colorNum %= 11
+                }
                 lose = 0
                 currMax = 4
             }
@@ -146,6 +154,6 @@ struct ChimpButton : Hashable {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        AltGameView()
     }
 }

@@ -53,7 +53,7 @@ struct LoseView: View {
                             .padding(.top, 50)
                         Text("\(buttonCount)")
                             .font(.system(size: 100)).bold()
-                        Text(buttonCount < 19 ? "You Are Not Smarter Than A Chimpanzee" : "You Are Smarter Than A Chimpanzee")
+                        Text(buttonCount < 10 ? "You Are Not Smarter Than A Chimpanzee" : "You Are Smarter Than A Chimpanzee")
                             .frame(width: 200)
                             .multilineTextAlignment(.center)
                             .font(.title3).bold()
