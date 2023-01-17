@@ -11,12 +11,13 @@
 		E30F238229705EFA006E6A6E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F238129705EFA006E6A6E /* ContentView.swift */; };
 		E30F238429705EFC006E6A6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E30F238329705EFC006E6A6E /* Assets.xcassets */; };
 		E30F238729705EFC006E6A6E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E30F238629705EFC006E6A6E /* Preview Assets.xcassets */; };
-		E30F239229705F47006E6A6E /* AltGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F239129705F47006E6A6E /* AltGameView.swift */; };
+		E30F239229705F47006E6A6E /* MainGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F239129705F47006E6A6E /* MainGame.swift */; };
 		E30F23982970D0B4006E6A6E /* LoseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F23972970D0B4006E6A6E /* LoseView.swift */; };
 		E30F239A2970D15B006E6A6E /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F23992970D15B006E6A6E /* HelpView.swift */; };
 		E30F23A42975BEF0006E6A6E /* dNote.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E30F23A32975BEF0006E6A6E /* dNote.mp3 */; };
 		E30F23A72975C164006E6A6E /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F23A62975C164006E6A6E /* AudioPlayer.swift */; };
-		E30F23C82976FAA1006E6A6E /* MainGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F23C72976FAA1006E6A6E /* MainGameView.swift */; };
+		E30F23C82976FAA1006E6A6E /* AltGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F23C72976FAA1006E6A6E /* AltGame.swift */; };
+		E30F23CA2976FE0C006E6A6E /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F23C92976FE0C006E6A6E /* CustomButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,12 +26,13 @@
 		E30F238129705EFA006E6A6E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E30F238329705EFC006E6A6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E30F238629705EFC006E6A6E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		E30F239129705F47006E6A6E /* AltGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltGameView.swift; sourceTree = "<group>"; };
+		E30F239129705F47006E6A6E /* MainGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGame.swift; sourceTree = "<group>"; };
 		E30F23972970D0B4006E6A6E /* LoseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoseView.swift; sourceTree = "<group>"; };
 		E30F23992970D15B006E6A6E /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		E30F23A32975BEF0006E6A6E /* dNote.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = dNote.mp3; sourceTree = "<group>"; };
 		E30F23A62975C164006E6A6E /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
-		E30F23C72976FAA1006E6A6E /* MainGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGameView.swift; sourceTree = "<group>"; };
+		E30F23C72976FAA1006E6A6E /* AltGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltGame.swift; sourceTree = "<group>"; };
+		E30F23C92976FE0C006E6A6E /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,8 +87,8 @@
 			isa = PBXGroup;
 			children = (
 				E30F238129705EFA006E6A6E /* ContentView.swift */,
-				E30F239129705F47006E6A6E /* AltGameView.swift */,
-				E30F23C72976FAA1006E6A6E /* MainGameView.swift */,
+				E30F239129705F47006E6A6E /* MainGame.swift */,
+				E30F23C72976FAA1006E6A6E /* AltGame.swift */,
 				E30F23972970D0B4006E6A6E /* LoseView.swift */,
 				E30F23992970D15B006E6A6E /* HelpView.swift */,
 			);
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				E30F23A62975C164006E6A6E /* AudioPlayer.swift */,
+				E30F23C92976FE0C006E6A6E /* CustomButton.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -172,10 +175,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E30F239229705F47006E6A6E /* AltGameView.swift in Sources */,
+				E30F239229705F47006E6A6E /* MainGame.swift in Sources */,
 				E30F238229705EFA006E6A6E /* ContentView.swift in Sources */,
 				E30F238029705EFA006E6A6E /* Chimp_TestApp.swift in Sources */,
-				E30F23C82976FAA1006E6A6E /* MainGameView.swift in Sources */,
+				E30F23C82976FAA1006E6A6E /* AltGame.swift in Sources */,
+				E30F23CA2976FE0C006E6A6E /* CustomButton.swift in Sources */,
 				E30F239A2970D15B006E6A6E /* HelpView.swift in Sources */,
 				E30F23982970D0B4006E6A6E /* LoseView.swift in Sources */,
 				E30F23A72975C164006E6A6E /* AudioPlayer.swift in Sources */,

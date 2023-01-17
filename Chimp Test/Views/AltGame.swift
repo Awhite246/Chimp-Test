@@ -1,37 +1,31 @@
 //
-//  Main.swift
+//  MainGameView.swift
 //  Chimp Test
 //
-//  Created by Alistair White on 1/12/23.
+//  Created by Alistair White on 1/17/23.
 //
 
 import SwiftUI
-import AVFoundation
 
-struct AltGameView: View {
+struct AltGame: View {
+    //what button show be pressed next
     @State var currNum = 1
+    //how many buttons displayed
     @State var currMax = 4
     //Used to keep track of how many loses there has been
     @State var lose = 0
-    //Used to choose random color palate from colorset
-    @State var colorNum = Int.random(in: 0...10)
+    
     //Stores weather to show lose and help view
     @State var showLoseView = false
     @State var showHelpView = false
+    
+    //colors
+    let colorSet : [[Color]]
+    //Used to choose random color palate from colorset
+    @State var colorNum = 0
+    
     //Array to hold column setup
     let columns = [GridItem(.fixed(69)), GridItem(.fixed(69)), GridItem(.fixed(69)), GridItem(.fixed(69)), GridItem(.fixed(69))]
-    //Array of arrays of color, each nested array holds a color set, Order goes buttonColor, background, textColor
-    let colorSet = [[Color("Tea Green"), Color("Steel Teal"), Color("Charcoal")],
-                    [Color("Pale Spring Bud"), Color("Tumbleweed"), Color("Black Coffee")],
-                    [Color("Misty Rose"), Color("French Lilac"), Color("Dark Purple")],
-                    [Color("Ash Gray"), Color("Xanadu"), Color("Rose Ebony")],
-                    [Color("Ivory"), Color("Cinnabar"), Color("Onyx")],
-                    [Color("Terra Cotta"), Color("Independence"), Color("Eggshell")],
-                    [Color("Maize Crayola"), Color("Persian Green"), Color("Charcoal")],
-                    [Color("Maximum Blue Purple"), Color("Medium Purple"), Color("Ghost White")],
-                    [Color("Paradise Pink"), Color("Indigo Dye"), Color("Lemon Meringue")],
-                    [Color("Cornsilk"), Color("Desert Sand"), Color("Tumbleweed 2")],
-                    [Color("Cinnamon Satin"), Color("Carolina Blue"), Color("Ivory")]]
     //Creates a list of buttons from 1 - 30 using .map
     @State var buttonList = (1...45).map { ChimpButton(num: $0, hidden: ($0 < 5) ? false : true)}
     var body: some View {
@@ -101,6 +95,8 @@ struct AltGameView: View {
         }
         .onAppear {
             randomizeList()
+            //randomize color
+            colorNum = Int.random(in: 0..<colorSet.count)
         }
         .sheet(isPresented: $showHelpView) {
             HelpView(colorBack: colorSet[colorNum][1], colorMiddle: colorSet[colorNum][0], colorFront: colorSet[colorNum][2])
@@ -109,12 +105,12 @@ struct AltGameView: View {
             lose += 1
             if lose == 3 {
                 //makes sure you dont get repeat color palat in a row
-                let tempColorNum = Int.random(in: 0...10)
+                let tempColorNum = Int.random(in: 0..<colorSet.count)
                 if colorNum != tempColorNum {
                     colorNum = tempColorNum
                 } else {
                     colorNum += 1
-                    colorNum %= 11
+                    colorNum %= colorSet.count
                 }
                 lose = 0
                 currMax = 4
@@ -141,19 +137,9 @@ struct AltGameView: View {
         }
     }
 }
-//stores number and hidden state
-struct ChimpButton : Hashable {
-    let id = UUID()
-    let num : Int
-    var hidden : Bool
-    
-    mutating func toggle() {
-        hidden.toggle()
-    }
-}
 
-struct MainView_Previews: PreviewProvider {
+struct AltGame_Previews: PreviewProvider {
     static var previews: some View {
-        AltGameView()
+        AltGame(colorSet: [[Color("Tea Green"), Color("Steel Teal"), Color("Charcoal")]])
     }
 }
