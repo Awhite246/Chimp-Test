@@ -176,7 +176,9 @@ struct AltGame: View {
             LoseView(colorBack: colorSet[colorNum][1], colorMiddle: colorSet[colorNum][0], colorFront: colorSet[colorNum][2], loseCount: lose + 1, buttonCount: currMax - 1)
         }
         .onReceive(timer) { _ in
-            if progress < 1 {
+            if progress < 0.9 {
+                progress += 0.01
+            } else if progress < 1 {
                 progress += 0.005
             } else {
                 hideAll = true
