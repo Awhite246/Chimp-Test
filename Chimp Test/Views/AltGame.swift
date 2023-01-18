@@ -36,6 +36,9 @@ struct AltGame: View {
     let timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
     
     @State var audioPlayer = AudioPlayer(fileNames: ["dNote", "lose"])
+    
+    //used for custom back button
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View {
         NavigationView {
             ZStack {
@@ -100,23 +103,46 @@ struct AltGame: View {
                         }
                     }
                     Spacer()
-                    Button {
-                        showHelpView = true
-                    } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 15)
-                                .foregroundColor(colorSet[colorNum][0])
-                                .frame(width:70, height: 70)
-                            Image(systemName: "questionmark.circle")
-                                .resizable()
-                                .foregroundColor(colorSet[colorNum][2])
-                                .frame(width: 25, height: 25)
-                                .offset(x: -10, y: -10)
+                    HStack {
+                        //custom back button
+                        Button {
+                            presentationMode.wrappedValue.dismiss()
+                        } label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .foregroundColor(colorSet[colorNum][0])
+                                    .frame(width:70, height: 70)
+                                Image(systemName: "restart.circle")
+                                    .resizable()
+                                    .foregroundColor(colorSet[colorNum][2])
+                                    .frame(width: 25, height: 25)
+                                    .offset(x: 10, y: -10)
+                            }
                         }
+                        .padding(.bottom, -50)
+                        .offset(x: -1 * UIScreen.main.bounds.width / 2.8)
+                        .ignoresSafeArea()
+                        .opacity(0.5)
+                        //help button
+                        Button {
+                            showHelpView = true
+                        } label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .foregroundColor(colorSet[colorNum][0])
+                                    .frame(width:70, height: 70)
+                                Image(systemName: "questionmark.circle")
+                                    .resizable()
+                                    .foregroundColor(colorSet[colorNum][2])
+                                    .frame(width: 25, height: 25)
+                                    .offset(x: -10, y: -10)
+                            }
+                        }
+                        .padding(.bottom, -50)
+                        .offset(x: UIScreen.main.bounds.width / 2.8)
+                        .ignoresSafeArea()
+                        .opacity(0.5)
                     }
-                    .padding(.bottom, -50)
-                    .offset(x: UIScreen.main.bounds.width / 2.2)
-                    .ignoresSafeArea()
                 }
             }
         }

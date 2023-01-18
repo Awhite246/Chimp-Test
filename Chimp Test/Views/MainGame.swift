@@ -12,7 +12,7 @@ struct MainGame: View {
     //what button show be pressed next
     @State var currNum = 1
     //how many buttons displayed
-    @State var currMax = 4
+    @State var currMax = 40
     //Used to keep track of how many loses there has been
     @State var lose = 0
     
@@ -30,6 +30,9 @@ struct MainGame: View {
     @State var buttonList = (1...45).map { ChimpButton(num: $0, hidden: ($0 < 5) ? false : true)}
     
     @State var audioPlayer = AudioPlayer(fileNames: ["dNote", "lose"])
+    
+    //used for custom back button
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View {
         NavigationView {
             ZStack {
@@ -79,23 +82,47 @@ struct MainGame: View {
                         }
                     }
                     Spacer()
-                    Button {
-                        showHelpView = true
-                    } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 15)
-                                .foregroundColor(colorSet[colorNum][0])
-                                .frame(width:70, height: 70)
-                            Image(systemName: "questionmark.circle")
-                                .resizable()
-                                .foregroundColor(colorSet[colorNum][2])
-                                .frame(width: 25, height: 25)
-                                .offset(x: -10, y: -10)
+                    HStack {
+                        //custom back button
+                        Button {
+                            presentationMode.wrappedValue.dismiss()
+                        } label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .foregroundColor(colorSet[colorNum][0])
+                                    .frame(width:70, height: 70)
+                                Image(systemName: "restart.circle")
+                                    .resizable()
+                                    .foregroundColor(colorSet[colorNum][2])
+                                    .frame(width: 25, height: 25)
+                                    .offset(x: 10, y: -10)
+                            }
                         }
+                        .padding(.bottom, -50)
+                        .offset(x: -1 * UIScreen.main.bounds.width / 2.8)
+                        .ignoresSafeArea()
+                        .opacity(0.5)
+                        //help button
+                        Button {
+                            showHelpView = true
+                        } label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .foregroundColor(colorSet[colorNum][0])
+                                    .frame(width:70, height: 70)
+                                Image(systemName: "questionmark.circle")
+                                    .resizable()
+                                    .foregroundColor(colorSet[colorNum][2])
+                                    .frame(width: 25, height: 25)
+                                    .offset(x: -10, y: -10)
+                            }
+                        }
+                        .padding(.bottom, -50)
+                        .offset(x: UIScreen.main.bounds.width / 2.8)
+                        .ignoresSafeArea()
+                        .opacity(0.5)
                     }
-                    .padding(.bottom, -50)
-                    .offset(x: UIScreen.main.bounds.width / 2.2)
-                    .ignoresSafeArea()
+                    
                 }
             }
         }
