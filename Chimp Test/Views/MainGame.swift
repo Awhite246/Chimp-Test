@@ -50,7 +50,7 @@ struct MainGame: View {
                                 }
                                 //if wrong number reset
                                 else if buttonList[num].num != currNum {
-                                    audioPlayer.playNote(pitch: -1000, fileNum: 1)
+                                    audioPlayer.playNote(pitch: 0, fileNum: 1)
                                     showLoseView = true
                                 }
                                 //if right number hide button

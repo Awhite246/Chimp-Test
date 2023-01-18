@@ -35,6 +35,7 @@ struct AltGame: View {
     @State var progress = 0.0
     let timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
     
+    @State var audioPlayer = AudioPlayer(fileNames: ["dNote", "lose"])
     var body: some View {
         NavigationView {
             ZStack {
@@ -61,6 +62,7 @@ struct AltGame: View {
                                 }
                                 //if last number randomize and add button
                                 if currNum == currMax {
+                                    audioPlayer.playNote(pitch: -1000 + (Float((currNum + 1)) * 100.0), fileNum: 0)
                                     currMax += 1
                                     currMax %= buttonList.count
                                     currNum = 1
@@ -70,12 +72,14 @@ struct AltGame: View {
                                 }
                                 //if wrong number reset
                                 else if buttonList[num].num != currNum {
+                                    audioPlayer.playNote(pitch: 0, fileNum: 1)
                                     showLoseView = true
                                 }
                                 //if right number hide button
                                 else {
                                     buttonList[num].toggle()
                                     currNum += 1
+                                    audioPlayer.playNote(pitch: -1000 + (Float(currNum) * 100.0), fileNum: 0)
                                 }
                             } label: {
                                 ZStack {
