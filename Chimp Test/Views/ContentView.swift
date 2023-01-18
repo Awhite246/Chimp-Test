@@ -21,10 +21,12 @@ struct ContentView: View {
                     [Color("Paradise Pink"), Color("Indigo Dye"), Color("Lemon Meringue")],
                     [Color("Cornsilk"), Color("Desert Sand"), Color("Tumbleweed 2")],
                     [Color("Cinnamon Satin"), Color("Carolina Blue"), Color("Ivory")]]
+    @State var colorNum = 0
+    
     var body: some View {
         NavigationView {
             ZStack {
-                Color("Steel Teal").ignoresSafeArea()
+                colorSet[colorNum][1].ignoresSafeArea()
                 VStack {
                     Group {
                         Image(systemName: "square.grid.3x3.topleft.filled")
@@ -35,7 +37,7 @@ struct ContentView: View {
                             .multilineTextAlignment(.center)
                             .padding(.vertical, 20)
                     }
-                    .foregroundColor(Color("Tea Green"))
+                    .foregroundColor(colorSet[colorNum][2])
                     Spacer()
                     NavigationLink {
                         MainGame(colorSet: colorSet)
@@ -44,10 +46,10 @@ struct ContentView: View {
                         ZStack {
                             RoundedRectangle(cornerRadius:10)
                                 .frame(width: 200, height: 75)
-                                .foregroundColor(Color("Charcoal"))
+                                .foregroundColor(colorSet[colorNum][0])
                             Text("Main Game")
                                 .font(.title2).bold()
-                                .foregroundColor(Color("Tea Green"))
+                                .foregroundColor(colorSet[colorNum][1])
                         }
                     }
                     .padding(.bottom, 50)
@@ -58,15 +60,18 @@ struct ContentView: View {
                         ZStack {
                             RoundedRectangle(cornerRadius:10)
                                 .frame(width: 250, height: 75)
-                                .foregroundColor(Color("Charcoal"))
+                                .foregroundColor(colorSet[colorNum][0])
                             Text("Alternative Game")
                                 .font(.title2).bold()
-                                .foregroundColor(Color("Tea Green"))
+                                .foregroundColor(colorSet[colorNum][1])
                         }
                     }
                 }
                 .padding()
             }
+        }
+        .onAppear {
+            colorNum = Int.random(in: 0..<colorSet.count)
         }
     }
 }
