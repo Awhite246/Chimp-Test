@@ -49,7 +49,7 @@ struct ContentView: View {
                                 .foregroundColor(colorSet[colorNum][0])
                             Text("Main Game")
                                 .font(.title2).bold()
-                                .foregroundColor(colorSet[colorNum][1])
+                                .foregroundColor(colorSet[colorNum][2])
                         }
                     }
                     .padding(.bottom, 50)
@@ -63,7 +63,7 @@ struct ContentView: View {
                                 .foregroundColor(colorSet[colorNum][0])
                             Text("Alternative Game")
                                 .font(.title2).bold()
-                                .foregroundColor(colorSet[colorNum][1])
+                                .foregroundColor(colorSet[colorNum][2])
                         }
                     }
                 }
