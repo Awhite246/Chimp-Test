@@ -25,7 +25,7 @@ struct HelpView: View {
                         .font(.title2).bold()
                         .multilineTextAlignment(.center)
                         .padding(.bottom, 30)
-                    Text("This is a test of working memory, made famous by a study that found that chimpanzees consistently outperform humans on this task.\n\n In the study, the chimps consistently outperformed humans, and some chimps were able to remember 9 digits over 90% of the time.\n\n This test is a variant of that concept, that gets increasingly difficult every turn, starting at 4 digits, and adding one every turn. If you pass a level, the number increases. If you fail, you get a strike. Three strikes and the test is over.")
+                    Text("This test will measure your working memory ability, which was found to be higher in chimpanzees than in humans in a study. Some of the chimps in the study were even able to remember 9 digits with a 90% accuracy. \n\nThis test is based on that concept, but it will become more difficult with each round, starting with 4 digits and adding one more each time. \n\nIf you are successful, the number of digits will increase, but if you fail, you will receive a strike. If you receive three strikes, the test will end.")
                         .font(.title3)
                         .fontWeight(.semibold)
                         .padding(.horizontal, 10)

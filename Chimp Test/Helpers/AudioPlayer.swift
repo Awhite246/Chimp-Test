@@ -8,48 +8,43 @@
 import AVFoundation
 
 class AudioPlayer {
-    var audioPlayer: AVAudioPlayer!
     var audioEngine = AVAudioEngine()
     var audioFile: AVAudioFile!
     var audioPlayerNode = AVAudioPlayerNode()
-    var timePitch = AVAudioUnitTimePitch()
-    
+    var changeAudioUnitTime = AVAudioUnitTimePitch()
     init(audioFileName: String) {
-        guard let url = Bundle.main.url(forResource: audioFileName, withExtension: "mp3") else { return }
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true)
-            audioFile = try AVAudioFile(forReading: url)
-            audioEngine.attach(audioPlayerNode)
-            audioEngine.attach(timePitch)
-            audioEngine.connect(audioPlayerNode, to: timePitch, format: audioFile.processingFormat)
-            audioEngine.connect(timePitch, to: audioEngine.mainMixerNode, format: audioFile.processingFormat)
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
-    
-    func playScale(scale: [Float]) {
-        for pitch in scale {
-            timePitch.pitch = pitch
-            audioPlayerNode.scheduleFile(audioFile, at: nil) {
-                DispatchQueue.main.async {
-                    self.audioEngine.stop()
-                }
+        if let url = Bundle.main.url(forResource: audioFileName, withExtension: "mp3") {
+            do {
+                //try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+                //try AVAudioSession.sharedInstance().setActive(true)
+                audioFile = try AVAudioFile(forReading: url)
+                audioEngine.attach(audioPlayerNode)
+                audioEngine.attach(changeAudioUnitTime)
+                audioEngine.connect(audioPlayerNode, to: changeAudioUnitTime, format: nil /*audioFile.processingFormat*/)
+                audioEngine.connect(changeAudioUnitTime, to: audioEngine.mainMixerNode, format: nil /*audioFile.processingFormat*/)
+            } catch let error {
+                print(error.localizedDescription)
             }
             try? audioEngine.start()
             audioPlayerNode.play()
-            Thread.sleep(forTimeInterval: 0.5)
+        } else {
+            print("Failed to find file")
         }
     }
-    func playNote(pitch: Float) {
-        timePitch.pitch = pitch
-        audioPlayerNode.scheduleFile(audioFile, at: nil) {
-            DispatchQueue.main.async {
-                self.audioEngine.stop()
-            }
+    
+    func playNote(pitch: Float, volume: Float = 10) {
+        print("playing at \nvolumn: \(volume)\npitch:\(pitch)")
+        changeAudioUnitTime.pitch = pitch
+        audioPlayerNode.volume = volume
+        //reset engine to change volume
+        //audioEngine.reset()
+        
+        // interrupt playing sound if you have to
+        if audioPlayerNode.isPlaying {
+            audioPlayerNode.stop()
+            audioPlayerNode.play()
         }
-        try? audioEngine.start()
-        audioPlayerNode.play()
+        
+        audioPlayerNode.scheduleFile(audioFile, at: nil, completionHandler: nil)
     }
 }

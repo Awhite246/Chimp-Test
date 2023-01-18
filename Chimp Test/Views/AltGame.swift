@@ -41,7 +41,6 @@ struct AltGame: View {
                 //creates background color using middle of color set
                 colorSet[colorNum][1].ignoresSafeArea()
                 VStack {
-                    Spacer()
                     ZStack(alignment: .leading) {
                         Rectangle()
                             .frame(maxWidth: 350, maxHeight: 4)
@@ -52,6 +51,7 @@ struct AltGame: View {
                             .foregroundColor(colorSet[colorNum][2])
                             .cornerRadius(10)
                     }
+                    .padding(.top, 25)
                     Spacer()
                     LazyVGrid(columns: columns) {
                         ForEach(0..<buttonList.count, id: \.self) { num in

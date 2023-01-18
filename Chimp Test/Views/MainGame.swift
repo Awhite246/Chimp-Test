@@ -28,6 +28,8 @@ struct MainGame: View {
     let columns = [GridItem(.fixed(69)), GridItem(.fixed(69)), GridItem(.fixed(69)), GridItem(.fixed(69)), GridItem(.fixed(69))]
     //Creates a list of buttons from 1 - 30 using .map
     @State var buttonList = (1...45).map { ChimpButton(num: $0, hidden: ($0 < 5) ? false : true)}
+    
+    @State var audioPlayer = AudioPlayer(audioFileName: "dNote")
     var body: some View {
         NavigationView {
             ZStack {
@@ -40,6 +42,7 @@ struct MainGame: View {
                             Button {
                                 //if last number randomize and add button
                                 if currNum == currMax {
+                                    audioPlayer.playNote(pitch: -50, volume: 2)
                                     currMax += 1
                                     currMax %= buttonList.count
                                     currNum = 1
@@ -53,6 +56,7 @@ struct MainGame: View {
                                 else {
                                     buttonList[num].toggle()
                                     currNum += 1
+                                    audioPlayer.playNote(pitch: -50, volume: 2)
                                 }
                             } label: {
                                 ZStack {
@@ -63,6 +67,7 @@ struct MainGame: View {
                                         .foregroundColor(buttonList[num].hidden ? .clear : colorSet[colorNum][0])
                                     Text("\(buttonList[num].num)")
                                     //shows color if not disabled
+                                    //also doesnt hide if on first 4 numbers to teach user how to play
                                         .foregroundColor((buttonList[num].hidden || (currNum > 1 && currMax > 4)) ? .clear : colorSet[colorNum][2])
                                         .font(.title).bold()
                                 }
