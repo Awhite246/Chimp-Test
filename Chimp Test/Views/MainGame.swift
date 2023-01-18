@@ -29,7 +29,7 @@ struct MainGame: View {
     //Creates a list of buttons from 1 - 30 using .map
     @State var buttonList = (1...45).map { ChimpButton(num: $0, hidden: ($0 < 5) ? false : true)}
     
-    @State var audioPlayer = AudioPlayer(audioFileName: "dNote")
+    @State var audioPlayer = AudioPlayer(fileNames: ["dNote", "lose"])
     var body: some View {
         NavigationView {
             ZStack {
@@ -42,7 +42,7 @@ struct MainGame: View {
                             Button {
                                 //if last number randomize and add button
                                 if currNum == currMax {
-                                    audioPlayer.playNote(pitch: -50, volume: 2)
+                                    audioPlayer.playNote(pitch: -1000 + (Float((currNum + 1)) * 100.0), fileNum: 0)
                                     currMax += 1
                                     currMax %= buttonList.count
                                     currNum = 1
@@ -50,13 +50,14 @@ struct MainGame: View {
                                 }
                                 //if wrong number reset
                                 else if buttonList[num].num != currNum {
+                                    audioPlayer.playNote(pitch: -1000, fileNum: 1)
                                     showLoseView = true
                                 }
                                 //if right number hide button
                                 else {
                                     buttonList[num].toggle()
                                     currNum += 1
-                                    audioPlayer.playNote(pitch: -50, volume: 2)
+                                    audioPlayer.playNote(pitch: -1000 + (Float(currNum) * 100.0), fileNum: 0)
                                 }
                             } label: {
                                 ZStack {

@@ -5,46 +5,64 @@
 //  Created by Alistair White on 1/16/23.
 //
 
+//https://stackoverflow.com/questions/39893997/xcode-8-swift-3-pitch-altering-sounds was alot of help in bug fixing
+
 import AVFoundation
 
 class AudioPlayer {
     var audioEngine = AVAudioEngine()
-    var audioFile: AVAudioFile!
-    var audioPlayerNode = AVAudioPlayerNode()
-    var changeAudioUnitTime = AVAudioUnitTimePitch()
-    init(audioFileName: String) {
-        if let url = Bundle.main.url(forResource: audioFileName, withExtension: "mp3") {
-            do {
-                //try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-                //try AVAudioSession.sharedInstance().setActive(true)
-                audioFile = try AVAudioFile(forReading: url)
-                audioEngine.attach(audioPlayerNode)
-                audioEngine.attach(changeAudioUnitTime)
-                audioEngine.connect(audioPlayerNode, to: changeAudioUnitTime, format: nil /*audioFile.processingFormat*/)
-                audioEngine.connect(changeAudioUnitTime, to: audioEngine.mainMixerNode, format: nil /*audioFile.processingFormat*/)
-            } catch let error {
-                print(error.localizedDescription)
+    var audioFiles = [AVAudioFile(), AVAudioFile()]
+    var audioPlayers = [AVAudioPlayerNode(), AVAudioPlayerNode()]
+    var pitchUnits = [AVAudioUnitTimePitch(), AVAudioUnitTimePitch()]
+    init(fileNames: [String]) {
+        var i = 0
+        for fileName in fileNames {
+            if let url = Bundle.main.url(forResource: "\(fileName)", withExtension: "mp3") {
+                do {
+                    audioFiles[i] = try AVAudioFile(forReading: url)
+                    i += 1
+                } catch let error {
+                    print(error.localizedDescription)
+                }
             }
-            try? audioEngine.start()
-            audioPlayerNode.play()
-        } else {
-            print("Failed to find file")
+        }
+        i = 0
+        for playerNode in audioPlayers {
+            let pitchUnit = pitchUnits[i]
+            
+            audioEngine.attach(playerNode)
+            audioEngine.attach(pitchUnit)
+            audioEngine.connect(playerNode, to: pitchUnit, format: nil)
+            audioEngine.connect(pitchUnit, to:audioEngine.mainMixerNode, format: nil)
+            
+            i += 1
+        }
+        
+        try? audioEngine.start()
+        
+        for playerNode in audioPlayers {
+            playerNode.play()
         }
     }
     
-    func playNote(pitch: Float, volume: Float = 10) {
-        print("playing at \nvolumn: \(volume)\npitch:\(pitch)")
-        changeAudioUnitTime.pitch = pitch
-        audioPlayerNode.volume = volume
+    func playNote(pitch: Float, volume: Float = 0.25, fileNum: Int) {
+        let playerNode = audioPlayers[fileNum]
+        let pitchUnit = pitchUnits[fileNum]
+        let file = audioFiles[fileNum]
+        print("\nplaying at \nvolumn: \(volume)\npitch:\(pitch)\nfile\(audioPlayers[fileNum])")
+        pitchUnit.pitch = pitch
+        playerNode.volume = volume
         //reset engine to change volume
-        //audioEngine.reset()
+        audioEngine.reset()
         
         // interrupt playing sound if you have to
-        if audioPlayerNode.isPlaying {
-            audioPlayerNode.stop()
-            audioPlayerNode.play()
+        for audioNode in audioPlayers {
+            if audioNode.isPlaying {
+                audioNode.stop()
+                audioNode.play()
+            }
         }
         
-        audioPlayerNode.scheduleFile(audioFile, at: nil, completionHandler: nil)
+        playerNode.scheduleFile(file, at: nil, completionHandler: nil)
     }
 }

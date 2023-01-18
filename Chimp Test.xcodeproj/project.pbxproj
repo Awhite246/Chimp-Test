@@ -18,6 +18,7 @@
 		E30F23A72975C164006E6A6E /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F23A62975C164006E6A6E /* AudioPlayer.swift */; };
 		E30F23C82976FAA1006E6A6E /* AltGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F23C72976FAA1006E6A6E /* AltGame.swift */; };
 		E30F23CA2976FE0C006E6A6E /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F23C92976FE0C006E6A6E /* CustomButton.swift */; };
+		E30F23D12978B073006E6A6E /* lose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E30F23CF2978B073006E6A6E /* lose.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		E30F23A62975C164006E6A6E /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		E30F23C72976FAA1006E6A6E /* AltGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltGame.swift; sourceTree = "<group>"; };
 		E30F23C92976FE0C006E6A6E /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		E30F23CF2978B073006E6A6E /* lose.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lose.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +70,6 @@
 				E30F23A52975C150006E6A6E /* Helpers */,
 				E30F238D29705F2B006E6A6E /* Views */,
 				E30F237F29705EFA006E6A6E /* Chimp_TestApp.swift */,
-				E30F23A32975BEF0006E6A6E /* dNote.mp3 */,
 				E30F238329705EFC006E6A6E /* Assets.xcassets */,
 				E30F238529705EFC006E6A6E /* Preview Content */,
 			);
@@ -99,6 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				E30F23A62975C164006E6A6E /* AudioPlayer.swift */,
+				E30F23A32975BEF0006E6A6E /* dNote.mp3 */,
+				E30F23CF2978B073006E6A6E /* lose.mp3 */,
 				E30F23C92976FE0C006E6A6E /* CustomButton.swift */,
 			);
 			path = Helpers;
@@ -162,6 +165,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E30F23D12978B073006E6A6E /* lose.mp3 in Resources */,
 				E30F23A42975BEF0006E6A6E /* dNote.mp3 in Resources */,
 				E30F238729705EFC006E6A6E /* Preview Assets.xcassets in Resources */,
 				E30F238429705EFC006E6A6E /* Assets.xcassets in Resources */,
