@@ -12,7 +12,7 @@ struct MainGame: View {
     //what button show be pressed next
     @State var currNum = 1
     //how many buttons displayed
-    @State var currMax = 40
+    @State var currMax = 4
     //Used to keep track of how many loses there has been
     @State var lose = 0
     
