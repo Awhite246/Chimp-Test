@@ -14,12 +14,11 @@ struct ContentView: View {
                     [Color("Pale Spring Bud"), Color("Tumbleweed"), Color("Black Coffee")],
                     [Color("Misty Rose"), Color("French Lilac"), Color("Dark Purple")],
                     [Color("Ash Gray"), Color("Xanadu"), Color("Rose Ebony")],
-                    [Color("Ivory"), Color("Cinnabar"), Color("Onyx")],
+                    [Color("Beige"), Color("Cinnabar"), Color("Onyx")],
                     [Color("Terra Cotta"), Color("Independence"), Color("Eggshell")],
                     [Color("Maize Crayola"), Color("Persian Green"), Color("Charcoal")],
                     [Color("Maximum Blue Purple"), Color("Medium Purple"), Color("Ghost White")],
-                    [Color("Paradise Pink"), Color("Indigo Dye"), Color("Lemon Meringue")],
-                    [Color("Cinnamon Satin"), Color("Carolina Blue"), Color("Ivory")]]
+                    [Color("Paradise Pink"), Color("Indigo Dye"), Color("Lemon Meringue")]]
     @State var colorNum = 0
     
     var body: some View {

@@ -177,9 +177,9 @@ struct AltGame: View {
         }
         .onReceive(timer) { _ in
             if progress < 0.9 {
-                progress += 0.01
+                progress += 0.04 / Double(currMax)
             } else if progress < 1 {
-                progress += 0.005
+                progress += 0.02 / Double(currMax)
             } else {
                 hideAll = true
             }
