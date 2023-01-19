@@ -19,7 +19,6 @@ struct ContentView: View {
                     [Color("Maize Crayola"), Color("Persian Green"), Color("Charcoal")],
                     [Color("Maximum Blue Purple"), Color("Medium Purple"), Color("Ghost White")],
                     [Color("Paradise Pink"), Color("Indigo Dye"), Color("Lemon Meringue")],
-                    [Color("Cornsilk"), Color("Desert Sand"), Color("Tumbleweed 2")],
                     [Color("Cinnamon Satin"), Color("Carolina Blue"), Color("Ivory")]]
     @State var colorNum = 0
     
