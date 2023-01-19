@@ -32,6 +32,7 @@ struct LoseView: View {
                             .font(.largeTitle)
                             .padding(.bottom, 10)
                         HStack {
+                            //shows the correct amount of lose squares
                             ForEach (0..<loseCount, id: \.self) { _ in
                                 Image(systemName: "square.split.diagonal.2x2")
                             }
@@ -44,6 +45,7 @@ struct LoseView: View {
                     .foregroundColor(colorMiddle)
                     
                 } else {
+                    //lose screen
                     Group {
                         Image(systemName: "square.grid.3x3.topleft.filled")
                             .font(.system(size: 75)).bold()
@@ -63,10 +65,12 @@ struct LoseView: View {
                     .foregroundColor(colorMiddle)
                 }
                 Spacer()
+                //return to game button
                 Button {
                     presentationMode.wrappedValue.dismiss()
                 } label: {
                     ZStack{
+                        
                         RoundedRectangle(cornerRadius:10)
                             .frame(width: 200, height: 75)
                             .foregroundColor(colorFront)

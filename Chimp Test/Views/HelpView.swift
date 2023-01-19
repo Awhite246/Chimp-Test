@@ -17,14 +17,17 @@ struct HelpView: View {
             colorBack.ignoresSafeArea()
             VStack {
                 Group {
+                    //title
                     Text("Are You Smarter Than a Chimpanzee?")
                         .font(.largeTitle).bold()
                         .multilineTextAlignment(.center)
                         .padding(.vertical, 20)
+                    //how to play
                     Text("Click the squares in order according to their numbers.\n The test will get progressively harder")
                         .font(.title2).bold()
                         .multilineTextAlignment(.center)
                         .padding(.bottom, 30)
+                    //cool description
                     Text("This test will measure your working memory ability, which was found to be higher in chimpanzees than in humans in a study. Some of the chimps in the study were even able to remember 9 digits with a 90% accuracy. \n\nThis test is based on that concept, but it will become more difficult with each round, starting with 4 digits and adding one more each time. \n\nIf you are successful, the number of digits will increase, but if you fail, you will receive a strike. If you receive three strikes, the test will end.")
                         .font(.title3)
                         .fontWeight(.semibold)

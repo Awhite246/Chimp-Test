@@ -27,9 +27,11 @@ struct ContentView: View {
                 colorSet[colorNum][1].ignoresSafeArea()
                 VStack {
                     Group {
+                        //app logo
                         Image(systemName: "square.grid.3x3.topleft.filled")
                             .font(.system(size: 100)).bold()
                             .padding(.top, 170)
+                        //title
                         Text("Are You Smarter Than a Chimpanzee?")
                             .font(.largeTitle).bold()
                             .multilineTextAlignment(.center)
@@ -37,6 +39,7 @@ struct ContentView: View {
                     }
                     .foregroundColor(colorSet[colorNum][2])
                     Spacer()
+                    //button to main game
                     NavigationLink {
                         MainGame(colorSet: colorSet)
                             .navigationBarBackButtonHidden()
@@ -51,6 +54,7 @@ struct ContentView: View {
                         }
                     }
                     .padding(.bottom, 50)
+                    //button to timer game / alt game
                     NavigationLink {
                         AltGame(colorSet: colorSet)
                             .navigationBarBackButtonHidden()
@@ -68,6 +72,7 @@ struct ContentView: View {
                 .padding()
             }
         }
+        //randomizes the color set used
         .onAppear {
             colorNum = Int.random(in: 0..<colorSet.count)
         }

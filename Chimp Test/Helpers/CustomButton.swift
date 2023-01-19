@@ -11,7 +11,9 @@ import SwiftUI
 //stores number and hidden state
 struct ChimpButton : Hashable {
     let id = UUID()
+    //what number the buton is
     let num : Int
+    //wether or not the button is hidden
     var hidden : Bool
     
     mutating func toggle() {

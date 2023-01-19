@@ -40,6 +40,7 @@ struct MainGame: View {
                 colorSet[colorNum][1].ignoresSafeArea()
                 VStack {
                     Spacer()
+                    //displays grid of buttons
                     LazyVGrid(columns: columns) {
                         ForEach(0..<buttonList.count, id: \.self) { num in
                             Button {
@@ -82,6 +83,7 @@ struct MainGame: View {
                         }
                     }
                     Spacer()
+                    //bottom buttons
                     HStack {
                         //custom back button
                         Button {
@@ -99,6 +101,7 @@ struct MainGame: View {
                             }
                         }
                         .padding(.bottom, -50)
+                        //using uiscreen bounds to try and make it work for any sized screen
                         .offset(x: -1 * UIScreen.main.bounds.width / 2.8)
                         .ignoresSafeArea()
                         .opacity(0.5)
@@ -126,6 +129,7 @@ struct MainGame: View {
                 }
             }
         }
+        //creates a random order imediatly
         .onAppear {
             randomizeList()
             //randomize color
@@ -142,9 +146,11 @@ struct MainGame: View {
                 if colorNum != tempColorNum {
                     colorNum = tempColorNum
                 } else {
+                    //increment by one if random value is the same
                     colorNum += 1
                     colorNum %= colorSet.count
                 }
+                //reset values
                 lose = 0
                 currMax = 4
             }
@@ -160,6 +166,7 @@ struct MainGame: View {
         updateButtons()
     }
     
+    //make sure hidden value is correct
     func updateButtons() {
         for i in 0..<buttonList.count {
             if buttonList[i].num <= currMax {
